@@ -13,11 +13,11 @@ function wichi {
 
 
 function h {
-	if [ "$1" ] ; then
-		history 1000 | grep "$@"
-	else
-		history 30;
-	fi
+if [ "$1" ] ; then
+	history 1000 | grep "$@"
+else
+	history 30;
+fi
 }
 
 #PATHの長さによってPS1を変更する
@@ -33,10 +33,20 @@ function cd_pwd_ps1 {
 	\cd "$@" && ls &&pwd_ps1
 }
 
-alias ls='ls --color=auto'
-alias ll='ls -l'
-alias la='ls -la'
-alias sl='ls --color=auto'
+uname_kernel=$(uname)
+
+if [[ "$uname_kernel" == "Linux" ]]; then
+	alias ls='ls --color=auto'
+	alias ll='ls -l'
+	alias la='ls -la'
+	alias sl='ls --color=auto'
+else
+	alias ls='ls -GF'
+	alias ll='ls -Gl'
+	alias la='ls -Gla'
+	alias sl='ls -GF'
+fi
+
 alias ..='cd ../'
 alias ...='cd ../../'
 alias wl='wc -l'
