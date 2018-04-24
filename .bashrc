@@ -30,7 +30,13 @@ function pwd_ps1 {
 }
 
 function cd_pwd_ps1 {
-	\cd "$@" && ls &&pwd_ps1
+	\pushd "$1" > /dev/null && ls &&pwd_ps1
+}
+
+function cdh {
+	dirs -v | sort -k 2 | uniq -f 1 | sort -k 1 | head -n 10
+	read -p "select number:" directory
+	cd $(echo ${DIRSTACK[$directory]}) 
 }
 
 uname_kernel=$(uname)
