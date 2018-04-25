@@ -34,10 +34,16 @@ function cd_pwd_ps1 {
 }
 
 function cdh {
-	dirs -v | sort -k 2 | uniq -f 1 | sort -k 1 | head -n 10
+	dirs -v -l | sort -k 2 | uniq -f 1 | sort -k 1 |head -n 10
 	read -p "select number:" directory
-	cd $(echo ${DIRSTACK[$directory]}) 
+	if [ -z $directory ]; then
+		printf "\e[1;32m どこに移動するの？番号を指定して\e[m\n"
+		cdh
+	else
+		cd $(echo ${DIRSTACK[$directory]}) 
+	fi
 }
+
 
 uname_kernel=$(uname)
 
@@ -61,11 +67,12 @@ alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
 alias v='vim'
+alias c='clear'
 alias qday=$HOME/code/rust/projects/qday/target/debug/./qday
 
 export EDITOR='vim'
 
 HISTSIZE=50000
 HISTFILESIZE=50000
-
+HISTIGNORE=history
 pwd_ps1
