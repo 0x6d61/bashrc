@@ -1,0 +1,6 @@
+# This file is intentionally not tracked. Copy it to ~/.bashrc.local and put
+# settings that are specific to this machine here.
+
+# export PATH="$HOME/.local/bin:$PATH"
+# export EDITOR='vim'
+# alias qday="$HOME/code/rust/projects/qday/target/debug/qday"
